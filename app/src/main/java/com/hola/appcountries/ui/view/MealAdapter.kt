@@ -5,9 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hola.appcountries.R
 
-class MealAdapter(var mealList:List<MealItemResponse> = emptyList()): RecyclerView.Adapter<MealViewHolder>() {
+//Función landa para que navegue a los detalles al pulsar en el cardView
+class MealAdapter(
+    var mealList: List<MealItemResponse> = emptyList(),
+    private val onItemSelected: (String) -> Unit
+) :
+    RecyclerView.Adapter<MealViewHolder>() {
 
-    fun updateList(list : List<MealItemResponse>){
+    fun updateList(list: List<MealItemResponse>) {
         mealList = list
         notifyDataSetChanged()
     }
@@ -21,6 +26,6 @@ class MealAdapter(var mealList:List<MealItemResponse> = emptyList()): RecyclerVi
     override fun getItemCount(): Int = mealList.size
 
     override fun onBindViewHolder(viewholder: MealViewHolder, position: Int) {
-        viewholder.bind(mealList[position])
+        viewholder.bind(mealList[position], onItemSelected)
     }
 }

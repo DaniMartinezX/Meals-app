@@ -1,5 +1,6 @@
 package com.hola.appcountries.ui.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hola.appcountries.databinding.ActivityMealsListBinding
+import com.hola.appcountries.ui.view.DetailMealActivity.Companion.EXTRA_ID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -41,7 +43,8 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
             override fun onQueryTextChange(newText: String?) = false
 
         })
-        adapter = MealAdapter()
+        // "it" para indicar el elemento que le hace falta a la función landa del correspondiente item
+        adapter = MealAdapter{navigateToDetail(it)}
         binding.rvMeals.setHasFixedSize(true)
         binding.rvMeals.layoutManager = LinearLayoutManager(this)
         binding.rvMeals.adapter = adapter
@@ -73,6 +76,12 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
 
     private fun showError() {
         Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun navigateToDetail(id:String){
+        val intent = Intent(this, DetailMealActivity::class.java)
+        intent.putExtra(EXTRA_ID,id)
+        startActivity(intent)
     }
 
     private fun getRetrofit(): Retrofit {

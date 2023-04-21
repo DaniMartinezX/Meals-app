@@ -8,4 +8,7 @@ interface ApiService {
 
     @GET
     suspend fun getMeals(@Url url:String): Response<MealDataResponse>
+
+    @GET
+    suspend fun getDetailsMealId(@Url url:String): Response<MealDetailResponse>
 }
