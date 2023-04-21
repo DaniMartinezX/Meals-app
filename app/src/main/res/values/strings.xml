@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">App Countries</string>
+    <string name="prefs_file">com.hola.appcountries.PREFERENCE_FILE_KEY</string>
+</resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "408982923457",
+    "project_id": "countries-app-9ce6e",
+    "storage_bucket": "countries-app-9ce6e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408982923457:android:346c03cb0e5f8999318c40",
+        "android_client_info": {
+          "package_name": "com.hola.appcountries"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408982923457-5d9evgv4vtun93gigttb67b8knbdasuq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhuKQe6SWSaZtHtXTJkgyk5goURh7YsRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408982923457-5d9evgv4vtun93gigttb67b8knbdasuq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
