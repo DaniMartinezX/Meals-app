@@ -24,7 +24,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.view.CountriesListActivity"
+            android:name=".ui.view.MealsListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

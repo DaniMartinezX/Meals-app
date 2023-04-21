@@ -1,9 +1,8 @@
 package com.hola.appcountries.ui.view
 
 import com.google.gson.annotations.SerializedName
-import okhttp3.Response
 
-data class CountryDataResponse (
+data class MealDataResponse (
     @SerializedName("meals") val meals: List<MealItemResponse>) {
 }
 

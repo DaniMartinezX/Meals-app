@@ -8,30 +8,24 @@ import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
-import com.hola.appcountries.R
-import com.hola.appcountries.databinding.ActivityCountriesListBinding
+import com.hola.appcountries.databinding.ActivityMealsListBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.json.JSONArray
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 
-class CountriesListActivity : AppCompatActivity(), OnQueryTextListener {
+class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
 
-    private lateinit var binding: ActivityCountriesListBinding
+    private lateinit var binding: ActivityMealsListBinding
     private lateinit var retrofit: Retrofit
     private lateinit var adapter: MealAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCountriesListBinding.inflate(layoutInflater)
+        binding = ActivityMealsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         retrofit = getRetrofit()
         initUI()
@@ -57,11 +51,11 @@ class CountriesListActivity : AppCompatActivity(), OnQueryTextListener {
     private fun searchByName(query: String) {
         binding.progressBar.isVisible = true
         CoroutineScope(Dispatchers.IO).launch {
-            val myResponse: Response<CountryDataResponse> =
+            val myResponse: Response<MealDataResponse> =
                 retrofit.create(ApiService::class.java).getMeals("search.php?s=$query")
             if (myResponse.isSuccessful) {
                 Log.i("dani","Funciona")
-                val response: CountryDataResponse? = myResponse.body()
+                val response: MealDataResponse? = myResponse.body()
                 if(response != null){
                     runOnUiThread{
                         adapter.updateList(response.meals)
