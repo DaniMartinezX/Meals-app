@@ -6,15 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import com.google.android.gms.auth.api.credentials.*
+import com.google.android.gms.auth.api.credentials.CredentialPickerConfig
+import com.google.android.gms.auth.api.credentials.Credentials
+import com.google.android.gms.auth.api.credentials.CredentialsClient
+import com.google.android.gms.auth.api.credentials.HintRequest
 import com.google.firebase.auth.FirebaseAuth
-import com.hola.appcountries.HomeActivity
-import com.hola.appcountries.HomeActivity.Companion.EMAIL
-import com.hola.appcountries.HomeActivity.Companion.PROVIDER
-import com.hola.appcountries.ProviderType
 import com.hola.appcountries.R
 import com.hola.appcountries.databinding.ActivityAuthBinding
-
 
 class AuthActivity : AppCompatActivity() {
 
@@ -46,21 +44,23 @@ class AuthActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
         binding.lyCredentials.visibility = View.VISIBLE
     }
 
     private fun session() {
         //Sin .edit porque estamos recuperando datos
         val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val email = prefs.getString(EMAIL, null)
-        val provider = prefs.getString(PROVIDER, null)
+       // val email = prefs.getString(EMAIL, null)
+        //val provider = prefs.getString(PROVIDER, null)
 
         //Sesión iniciada
+        /*
         if (email != null && provider != null) {
             binding.lyCredentials.visibility = View.INVISIBLE
             showHome(email, ProviderType.valueOf(provider))
         }
+
+         */
 
 
     }
@@ -77,7 +77,7 @@ class AuthActivity : AppCompatActivity() {
                     binding.etPassword.text.toString()
                 ).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        showHome(it.result?.user?.email ?: "", ProviderType.BASIC)
+                        //showHome(it.result?.user?.email ?: "", ProviderType.BASIC)
                     } else {
                         showAlert()
                     }
@@ -88,23 +88,35 @@ class AuthActivity : AppCompatActivity() {
         //Cuando el usuario hace click en "Acceder"
         binding.loginButton.setOnClickListener {
             if (binding.etEmail.text.isNotEmpty() && binding.etPassword.text.isNotEmpty()) {
-
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(
                     binding.etEmail.text.toString(),
                     binding.etPassword.text.toString()
                 ).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        showHome(it.result?.user?.email ?: "", ProviderType.BASIC)
+                        //showHome(it.result?.user?.email ?: "", ProviderType.BASIC)
                     } else {
                         showAlert()
                     }
                 }
+            } else {
+                showErrorFields()
+                binding.etEmail.setText("")
+                binding.etPassword.setText("")
             }
         }
 
         binding.googleButton.setOnClickListener {
 
         }
+    }
+
+    private fun showErrorFields() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Error")
+        builder.setMessage("You must fill in all fields")
+        builder.setPositiveButton("Accept", null)
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
     //Función que muestra error al no haber podido autenticar al usuario.
@@ -117,12 +129,16 @@ class AuthActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    /*
     private fun showHome(email: String, provider: ProviderType) {
+
         val intent = Intent(this, HomeActivity::class.java).apply {
             putExtra(EMAIL, email)
             putExtra(PROVIDER, provider.name)
         }
         startActivity(intent)
-    }
+        }
+         */
+
 
 }

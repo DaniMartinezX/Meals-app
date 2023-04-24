@@ -25,13 +25,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="16dp"
-            android:hint="Email" />
+            android:hint="@string/email"/>
 
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña" />
+            android:hint="@string/password"
+            android:inputType="textPassword"/>
 
         <LinearLayout
             android:id="@+id/lyButtonsCredentials"
@@ -51,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
                 android:layout_weight="1"
-                android:text="registrase" />
+                android:text="@string/sign_up" />
 
             <Button
                 android:id="@+id/loginButton"
@@ -59,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
                 android:layout_weight="1"
-                android:text="acceder" />
+                android:text="@string/log_in" />
         </LinearLayout>
 
         <com.google.android.material.divider.MaterialDivider

@@ -12,11 +12,5 @@
     <!-- MealsApp -->
     <color name="meal_item_name_selected">#BE3700B3</color>
     <color name="meal_item_name_unselected">#BEB08EFD</color>
-    <color name="cardview_pressed_background">#FFD0D0D0</color>
-    <color name="cardview_shadow_end_color">#FFBDBDBD</color>
-    <color name="cardview_selected_background">#FFD0D0D0</color>
-    <color name="cardview_light_background">#FFFFFFFF</color>
-    <color name="cardview_text_background_selected">#FF3700B3</color>
-    <color name="cardview_text_color_selected">#FFFFFFFF</color>
 
 </resources>
