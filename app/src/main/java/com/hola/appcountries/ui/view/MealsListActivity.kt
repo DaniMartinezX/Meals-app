@@ -51,10 +51,15 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
         binding.rvCategories.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvCategories.adapter = adapterCategory
+
+        //Cargando categorías
         loadingCategories()
+
+        //Filtrado por categorías al seleccionar una
         adapterCategory.setOnItemClickListener(object : CategoryAdapter.OnItemClickListener {
             override fun onItemClick(category: CategoryItemResponse) {
                 val categoryName = category.name
+
                 // Aquí puedes hacer algo con el nombre de la categoría seleccionada
                 CoroutineScope(Dispatchers.IO).launch {
                     val myResponse: Response<MealDataResponse> =

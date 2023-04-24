@@ -1,13 +1,11 @@
 package com.hola.appcountries.ui.view
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.hola.appcountries.R
-
-
-
-
 
 class CategoryAdapter(var categoriesList: List<CategoryItemResponse> = emptyList()) :
     RecyclerView.Adapter<CategoryViewHolder>() {
@@ -16,6 +14,7 @@ class CategoryAdapter(var categoriesList: List<CategoryItemResponse> = emptyList
         fun onItemClick(category: CategoryItemResponse)
     }
 
+    private var selectedItemIndex = -1
     private var listener: OnItemClickListener? = null
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
@@ -35,10 +34,22 @@ class CategoryAdapter(var categoriesList: List<CategoryItemResponse> = emptyList
 
     override fun getItemCount(): Int = categoriesList.size
 
-    override fun onBindViewHolder(viewholder: CategoryViewHolder, position: Int) {
+    override fun onBindViewHolder(viewholder: CategoryViewHolder, @SuppressLint("RecyclerView") position: Int) {
         viewholder.bind(categoriesList[position])
+        if (selectedItemIndex == position) {
+            viewholder.flSelection.setBackgroundColor(ContextCompat.getColor(viewholder.itemView.context, R.color.meal_item_name_selected))
+        } else {
+            viewholder.flSelection.setBackgroundColor(ContextCompat.getColor(viewholder.itemView.context, R.color.meal_item_name_unselected))
+        }
         viewholder.itemView.setOnClickListener{
+            val prevSelectedItemIndex = selectedItemIndex
+            selectedItemIndex = position
+            if (prevSelectedItemIndex != -1) {
+                notifyItemChanged(prevSelectedItemIndex)
+            }
+            notifyItemChanged(selectedItemIndex)
             listener?.onItemClick(categoriesList[position])
         }
     }
+
 }

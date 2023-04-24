@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardViewSelected"
     android:layout_width="150dp"
     android:layout_height="100dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,11 +22,10 @@
             android:scaleType="centerCrop"/>
 
         <FrameLayout
-            android:id="@+id/flSelection"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_gravity="bottom"
-            android:background="@color/meal_item_name_unselected">
+            android:background="@color/meal_item_name_selected">
 
             <TextView
                 android:id="@+id/tvCategory"
