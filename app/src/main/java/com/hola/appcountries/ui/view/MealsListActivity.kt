@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hola.appcountries.databinding.ActivityMealsListBinding
 import com.hola.appcountries.ui.view.DetailMealActivity.Companion.EXTRA_ID
 import kotlinx.coroutines.CoroutineScope
@@ -24,6 +25,8 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
     private lateinit var binding: ActivityMealsListBinding
     private lateinit var retrofit: Retrofit
     private lateinit var adapter: MealAdapter
+    private lateinit var adapterCategory: CategoryAdapter
+    private lateinit var rvCategories: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,13 +46,60 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
             override fun onQueryTextChange(newText: String?) = false
 
         })
+        adapterCategory = CategoryAdapter()
+        binding.rvCategories.setHasFixedSize(true)
+        binding.rvCategories.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvCategories.adapter = adapterCategory
+        loadingCategories()
+        adapterCategory.setOnItemClickListener(object : CategoryAdapter.OnItemClickListener {
+            override fun onItemClick(category: CategoryItemResponse) {
+                val categoryName = category.name
+                // Aquí puedes hacer algo con el nombre de la categoría seleccionada
+                CoroutineScope(Dispatchers.IO).launch {
+                    val myResponse: Response<MealDataResponse> =
+                        retrofit.create(ApiService::class.java).getMealsByCategory("filter.php?c=$categoryName")
+                    if (myResponse.isSuccessful) {
+                        Log.i("dani", "Funciona filtrado")
+                        val response: MealDataResponse? = myResponse.body()
+                        if (response != null) {
+                            runOnUiThread {
+                                adapter.updateList(response.meals)
+                                binding.progressBar.isVisible = false
+                            }
+                        }
+                    } else {
+                        Log.i("dani", "No funciona")
+                        showError()
+                    }
+                }
+            }
+        })
+
+
         // "it" para indicar el elemento que le hace falta a la función landa del correspondiente item
-        adapter = MealAdapter{navigateToDetail(it)}
+        adapter = MealAdapter { navigateToDetail(it) }
         binding.rvMeals.setHasFixedSize(true)
         binding.rvMeals.layoutManager = LinearLayoutManager(this)
         binding.rvMeals.adapter = adapter
-        //todo detalle
+
+
     }
+
+    private fun loadingCategories() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val myResponse: Response<CategoryResponse> =
+                retrofit.create(ApiService::class.java).getCategories("categories.php")
+            val response: CategoryResponse? = myResponse.body()
+            if (response != null) {
+                runOnUiThread {
+                    adapterCategory.updateList(response.categories)
+                }
+            }
+        }
+    }
+
+
 
     private fun searchByName(query: String) {
         binding.progressBar.isVisible = true
@@ -57,16 +107,16 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
             val myResponse: Response<MealDataResponse> =
                 retrofit.create(ApiService::class.java).getMeals("search.php?s=$query")
             if (myResponse.isSuccessful) {
-                Log.i("dani","Funciona")
+                Log.i("dani", "Funciona")
                 val response: MealDataResponse? = myResponse.body()
-                if(response != null){
-                    runOnUiThread{
+                if (response != null) {
+                    runOnUiThread {
                         adapter.updateList(response.meals)
                         binding.progressBar.isVisible = false
                     }
                 }
             } else {
-                Log.i("dani","No funciona")
+                Log.i("dani", "No funciona")
                 showError()
             }
 
@@ -78,9 +128,9 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
         Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_SHORT).show()
     }
 
-    private fun navigateToDetail(id:String){
+    private fun navigateToDetail(id: String) {
         val intent = Intent(this, DetailMealActivity::class.java)
-        intent.putExtra(EXTRA_ID,id)
+        intent.putExtra(EXTRA_ID, id)
         startActivity(intent)
     }
 
