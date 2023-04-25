@@ -17,4 +17,7 @@ interface ApiService {
 
     @GET
     suspend fun getMealsByCategory(@Url url:String): Response<MealDataResponse>
+
+    @GET
+    suspend fun getRandomMeal(@Url url:String): Response<MealDetailResponse>
 }

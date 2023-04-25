@@ -11,6 +11,7 @@ data class Meal(
     @SerializedName("strCategory") val category: String,
     @SerializedName("strArea") val area: String,
     @SerializedName("strInstructions") val instructions: String,
-    @SerializedName("strMealThumb") val image: String
+    @SerializedName("strMealThumb") val image: String,
+    @SerializedName("idMeal") val id: String
 )
 

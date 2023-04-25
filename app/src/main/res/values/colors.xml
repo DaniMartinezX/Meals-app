@@ -12,5 +12,7 @@
     <!-- MealsApp -->
     <color name="meal_item_name_selected">#BE3700B3</color>
     <color name="meal_item_name_unselected">#BEB08EFD</color>
+    <color name="off_white">#80FFFFFF</color>
+    <color name="green">#0F9D58</color>
 
 </resources>

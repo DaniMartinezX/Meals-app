@@ -6,6 +6,92 @@
     android:layout_height="match_parent"
     tools:context=".ui.view.HomeActivity">
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="90dp">
+
+        <TextView
+            android:id="@+id/tvTitleRandomMeal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="What are we eating today?"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textStyle="italic|bold"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvMeal"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            app:cardCornerRadius="16dp"
+            android:layout_margin="32dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black">
+
+                <ImageView
+                    android:id="@+id/ivMeal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_random_white"
+                    android:background="@color/black"/>
+
+                <FrameLayout
+                    android:id="@+id/flMeal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="bottom"
+
+                    android:background="@color/meal_item_name_unselected">
+
+                    <TextView
+                        android:id="@+id/tvMealName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        tools:text="Texto de prueba"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center|top"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/tvCategoryName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Texto de prueba"
+                        android:textSize="16sp"
+                        android:layout_gravity="center|bottom"
+                        android:layout_marginBottom="8dp"
+                        android:textColor="@color/off_white"/>
+
+                </FrameLayout>
+            </FrameLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnImage"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_random"
+            android:layout_marginHorizontal="32dp"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
@@ -26,7 +112,7 @@
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fab_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_search"
