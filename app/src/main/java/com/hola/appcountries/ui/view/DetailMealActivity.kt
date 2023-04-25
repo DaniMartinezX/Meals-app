@@ -47,8 +47,16 @@ class DetailMealActivity : AppCompatActivity() {
 
     private fun dataReceived(meal: MealDetailResponse) {
         val mealObj = meal.meals[0] //Tiene sólo un objeto el Array !!!!
+        val name = mealObj.name
+        binding.tvTitle.text = name
         val imageUrl = mealObj.image
         Picasso.get().load(imageUrl).into(binding.ivMealD)
+        val category = mealObj.category
+        binding.tvSubtitleCategory.text = category
+        val area = mealObj.area
+        binding.tvArea.text = area
+        val instructions = mealObj.instructions
+        binding.tvInstructions.text = instructions
     }
 
     private fun getRetrofit(): Retrofit {
