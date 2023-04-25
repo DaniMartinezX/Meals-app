@@ -51,18 +51,7 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        binding.cvMeal.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                val myResponse: Response<MealDetailResponse> =
-                    retrofit.create(ApiService::class.java).getRandomMeal("random.php")
-                if(myResponse.isSuccessful){
-                    val response: MealDetailResponse? = myResponse.body()
-                    if (response != null){
-                        runOnUiThread{ dataReceived(response)}
-                    }
-                }
-            }
-        }
+
 
         binding.btnImage.setOnClickListener {
             binding.flMeal.isVisible = true
@@ -77,7 +66,10 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
         }
+
+
     }
+
 
     private fun navigateToDetail(id: String) {
         val intent = Intent(this, DetailMealActivity::class.java)
@@ -93,13 +85,10 @@ class HomeActivity : AppCompatActivity() {
         binding.tvMealName.text = nameMeal
         val nameCategory = mealObj.category
         binding.tvCategoryName.text = nameCategory
+        val idMeal = mealObj.id
+        binding.cvMeal.setOnClickListener { navigateToDetail(idMeal) }
     }
 
-    private fun dataReceivedId(meal: MealDetailResponse): String {
-        val mealObj = meal.meals[0] //Tiene sólo un objeto el Array !!!!
-        val id = mealObj.id
-        return id
-    }
 
     private fun navigateToProfile() {
         val intent = Intent(this,ProfileActivity::class.java)
