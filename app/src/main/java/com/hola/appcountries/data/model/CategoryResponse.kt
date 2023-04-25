@@ -1,6 +1,7 @@
-package com.hola.appcountries.ui.view
+package com.hola.appcountries.data.model
 
 import com.google.gson.annotations.SerializedName
+
 
 data class CategoryResponse(
     @SerializedName ("categories") val categories: List<CategoryItemResponse>

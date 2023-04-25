@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hola.appcountries.R
+import com.hola.appcountries.data.model.MealItemResponse
 
 //Función landa para que navegue a los detalles al pulsar en el cardView
 class MealAdapter(

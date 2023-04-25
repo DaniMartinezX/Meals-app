@@ -3,6 +3,7 @@ package com.hola.appcountries.ui.view
 import android.view.View
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.hola.appcountries.data.model.CategoryItemResponse
 import com.hola.appcountries.databinding.ItemCategoryBinding
 import com.squareup.picasso.Picasso
 

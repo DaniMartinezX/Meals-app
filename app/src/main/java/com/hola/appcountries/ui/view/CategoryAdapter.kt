@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.hola.appcountries.R
+import com.hola.appcountries.data.model.CategoryItemResponse
 
 class CategoryAdapter(var categoriesList: List<CategoryItemResponse> = emptyList()) :
     RecyclerView.Adapter<CategoryViewHolder>() {

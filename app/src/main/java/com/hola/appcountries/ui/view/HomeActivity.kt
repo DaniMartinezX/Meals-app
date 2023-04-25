@@ -3,9 +3,10 @@ package com.hola.appcountries.ui.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.core.view.isVisible
 import com.hola.appcountries.R
+import com.hola.appcountries.data.network.ApiService
+import com.hola.appcountries.data.model.MealDetailResponse
 import com.hola.appcountries.databinding.ActivityHomeBinding
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope

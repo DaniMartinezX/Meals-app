@@ -10,6 +10,10 @@ import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.hola.appcountries.data.model.MealDataResponse
+import com.hola.appcountries.data.network.ApiService
+import com.hola.appcountries.data.model.CategoryItemResponse
+import com.hola.appcountries.data.model.CategoryResponse
 import com.hola.appcountries.databinding.ActivityMealsListBinding
 import com.hola.appcountries.ui.view.DetailMealActivity.Companion.EXTRA_ID
 import kotlinx.coroutines.CoroutineScope

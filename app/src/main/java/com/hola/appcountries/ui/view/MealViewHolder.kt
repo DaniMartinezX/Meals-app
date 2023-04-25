@@ -2,6 +2,7 @@ package com.hola.appcountries.ui.view
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.hola.appcountries.data.model.MealItemResponse
 import com.hola.appcountries.databinding.ItemMealBinding
 import com.squareup.picasso.Picasso
 
