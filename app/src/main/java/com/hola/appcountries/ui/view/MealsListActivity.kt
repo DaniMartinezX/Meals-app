@@ -5,17 +5,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hola.appcountries.data.model.MealDataResponse
 import com.hola.appcountries.data.network.ApiService
 import com.hola.appcountries.data.model.CategoryItemResponse
+import com.hola.appcountries.data.model.CategoryProvider
 import com.hola.appcountries.data.model.CategoryResponse
 import com.hola.appcountries.databinding.ActivityMealsListBinding
 import com.hola.appcountries.ui.view.DetailMealActivity.Companion.EXTRA_ID
+import com.hola.appcountries.ui.viewmodel.CategoryViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,12 +35,25 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
     private lateinit var adapter: MealAdapter
     private lateinit var adapterCategory: CategoryAdapter
     private lateinit var rvCategories: RecyclerView
+    private lateinit var categoryViewModel: CategoryViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMealsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         retrofit = getRetrofit()
+
+        rvCategories = binding.rvCategories
+        rvCategories.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        adapterCategory = CategoryAdapter(emptyList())
+        rvCategories.adapter = adapterCategory
+
+        categoryViewModel = ViewModelProvider(this).get(CategoryViewModel::class.java)
+        categoryViewModel.categoryModel.observe(this) { categoryResponse ->
+            categoryResponse?.let { adapterCategory.updateList(it) }
+        }
+        categoryViewModel.onCreate()
+
         initUI()
     }
 
@@ -57,7 +74,7 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
         binding.rvCategories.adapter = adapterCategory
 
         //Cargando categorías
-        loadingCategories()
+
 
         //Filtrado por categorías al seleccionar una
         adapterCategory.setOnItemClickListener(object : CategoryAdapter.OnItemClickListener {
@@ -93,19 +110,6 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
         binding.rvMeals.adapter = adapter
 
 
-    }
-
-    private fun loadingCategories() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val myResponse: Response<CategoryResponse> =
-                retrofit.create(ApiService::class.java).getCategories("categories.php")
-            val response: CategoryResponse? = myResponse.body()
-            if (response != null) {
-                runOnUiThread {
-                    adapterCategory.updateList(response.categories)
-                }
-            }
-        }
     }
 
 
