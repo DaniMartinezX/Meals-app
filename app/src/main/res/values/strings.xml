@@ -9,4 +9,6 @@
     <string name="log_in">Login</string>
     <string name="instructions">Instructions</string>
     <string name="area">Area: </string>
+    <string name="log_out">Log out</string>
+    <string name="provider">Provider</string>
 </resources>

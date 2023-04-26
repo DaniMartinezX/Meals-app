@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "408982923457",
-    "project_id": "countries-app-9ce6e",
-    "storage_bucket": "countries-app-9ce6e.appspot.com"
+    "project_number": "216167429630",
+    "project_id": "meals-app-a023e",
+    "storage_bucket": "meals-app-a023e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:408982923457:android:346c03cb0e5f8999318c40",
+        "mobilesdk_app_id": "1:216167429630:android:6534472c46fb8e5060bcaf",
         "android_client_info": {
           "package_name": "com.hola.appcountries"
         }
       },
       "oauth_client": [
         {
-          "client_id": "408982923457-5d9evgv4vtun93gigttb67b8knbdasuq.apps.googleusercontent.com",
+          "client_id": "216167429630-mnuhkm4mjha6r57conlndo93utnnvmft.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBhuKQe6SWSaZtHtXTJkgyk5goURh7YsRk"
+          "current_key": "AIzaSyB9xf9FlS37fLetkAFsJfQ9CjcyjgpSAaU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "408982923457-5d9evgv4vtun93gigttb67b8knbdasuq.apps.googleusercontent.com",
+              "client_id": "216167429630-mnuhkm4mjha6r57conlndo93utnnvmft.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

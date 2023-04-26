@@ -9,6 +9,9 @@ import com.hola.appcountries.R
 import com.hola.appcountries.data.model.CategoryItemResponse
 import com.hola.appcountries.data.model.CategoryResponse
 
+interface OnItemClickListener{
+    fun onItemClick(category: CategoryItemResponse)
+}
 class CategoryAdapter(var categoriesList: List<CategoryItemResponse> = emptyList()) :
     RecyclerView.Adapter<CategoryViewHolder>() {
 
@@ -55,3 +58,4 @@ class CategoryAdapter(var categoriesList: List<CategoryItemResponse> = emptyList
     }
 
 }
+

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.view.isVisible
@@ -15,18 +14,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hola.appcountries.data.model.MealDataResponse
 import com.hola.appcountries.data.network.ApiService
 import com.hola.appcountries.data.model.CategoryItemResponse
-import com.hola.appcountries.data.model.CategoryProvider
-import com.hola.appcountries.data.model.CategoryResponse
 import com.hola.appcountries.databinding.ActivityMealsListBinding
 import com.hola.appcountries.ui.view.DetailMealActivity.Companion.EXTRA_ID
 import com.hola.appcountries.ui.viewmodel.CategoryViewModel
+import com.hola.appcountries.ui.viewmodel.MealDataViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
 
 class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
 
@@ -35,7 +32,9 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
     private lateinit var adapter: MealAdapter
     private lateinit var adapterCategory: CategoryAdapter
     private lateinit var rvCategories: RecyclerView
+    private lateinit var rvMeals: RecyclerView
     private lateinit var categoryViewModel: CategoryViewModel
+    private lateinit var mealDataViewModel: MealDataViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +42,7 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
         setContentView(binding.root)
         retrofit = getRetrofit()
 
+        //Cargando categorías
         rvCategories = binding.rvCategories
         rvCategories.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         adapterCategory = CategoryAdapter(emptyList())
@@ -73,7 +73,7 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvCategories.adapter = adapterCategory
 
-        //Cargando categorías
+
 
 
         //Filtrado por categorías al seleccionar una
