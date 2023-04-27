@@ -14,10 +14,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hola.appcountries.data.model.MealDataResponse
 import com.hola.appcountries.data.network.ApiService
 import com.hola.appcountries.data.model.CategoryItemResponse
+import com.hola.appcountries.data.model.MealItemResponse
 import com.hola.appcountries.databinding.ActivityMealsListBinding
 import com.hola.appcountries.ui.view.DetailMealActivity.Companion.EXTRA_ID
 import com.hola.appcountries.ui.viewmodel.CategoryViewModel
 import com.hola.appcountries.ui.viewmodel.MealDataViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,6 +27,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+@AndroidEntryPoint
 class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
 
     private lateinit var binding: ActivityMealsListBinding
@@ -83,20 +86,9 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
 
                 // Aquí puedes hacer algo con el nombre de la categoría seleccionada
                 CoroutineScope(Dispatchers.IO).launch {
-                    val myResponse: Response<MealDataResponse> =
-                        retrofit.create(ApiService::class.java).getMealsByCategory("filter.php?c=$categoryName")
-                    if (myResponse.isSuccessful) {
-                        Log.i("dani", "Funciona filtrado")
-                        val response: MealDataResponse? = myResponse.body()
-                        if (response != null) {
-                            runOnUiThread {
-                                adapter.updateList(response.meals)
-                                binding.progressBar.isVisible = false
-                            }
-                        }
-                    } else {
-                        Log.i("dani", "No funciona")
-                        showError()
+                    val response = getMealsByCategory(categoryName)
+                    runOnUiThread {
+                        adapter.updateList(response)
                     }
                 }
             }
@@ -112,6 +104,14 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
 
     }
 
+    suspend fun getMealsByCategory(categoryName: String): List<MealItemResponse> {
+        val response = retrofit.create(ApiService::class.java).getMealsByCategory(categoryName)
+        return if (response.isSuccessful && response.body() != null){
+            response.body()!!.meals
+        } else {
+            emptyList()
+        }
+    }
 
 
     private fun searchByName(query: String) {

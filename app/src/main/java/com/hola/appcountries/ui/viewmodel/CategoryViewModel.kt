@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hola.appcountries.data.model.CategoryItemResponse
 import com.hola.appcountries.domain.GetCategoriesUseCase
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 
 class CategoryViewModel : ViewModel() {

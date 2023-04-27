@@ -4,6 +4,6 @@ import retrofit2.Response
 
 class CategoryProvider {
     companion object{
-        lateinit var categories:CategoryResponse
+        lateinit var categories:List<CategoryItemResponse>
     }
 }
