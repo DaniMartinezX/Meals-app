@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.hola.appcountries.R
 import com.hola.appcountries.databinding.ActivityAuthBinding
 
+
 class AuthActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAuthBinding
