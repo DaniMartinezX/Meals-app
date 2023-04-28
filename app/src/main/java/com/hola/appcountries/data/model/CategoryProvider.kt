@@ -1,9 +1,9 @@
 package com.hola.appcountries.data.model
 
-import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class CategoryProvider {
-    companion object{
-        lateinit var categories:List<CategoryItemResponse>
-    }
+@Singleton
+class CategoryProvider @Inject constructor() {
+    var categories: List<CategoryItemResponse> = emptyList()
 }

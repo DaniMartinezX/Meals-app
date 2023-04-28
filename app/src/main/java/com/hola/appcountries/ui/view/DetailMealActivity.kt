@@ -3,16 +3,23 @@ package com.hola.appcountries.ui.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
+import com.hola.appcountries.data.model.Meal
 import com.hola.appcountries.data.network.ApiService
 import com.hola.appcountries.data.model.MealDetailResponse
 import com.hola.appcountries.databinding.ActivityDetailMealBinding
+import com.hola.appcountries.domain.GetDetailsMealByIdUseCase
+import com.hola.appcountries.domain.GetMealsBySearchUseCase
+import com.hola.appcountries.ui.viewmodel.MealDataViewModel
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+@AndroidEntryPoint
 class DetailMealActivity : AppCompatActivity() {
 
     //Constante para el extra del activity
@@ -21,6 +28,7 @@ class DetailMealActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityDetailMealBinding
+    private val mealDataViewModel: MealDataViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,31 +40,28 @@ class DetailMealActivity : AppCompatActivity() {
     }
 
     private fun getMealInformation(id: String) {
-        Log.i("dani","Antes da corrutina")
-        CoroutineScope(Dispatchers.IO).launch {
-            val mealDetail = getRetrofit().create(ApiService::class.java).getDetailsMealId("lookup.php?i=$id")
-
-            Log.i("dani","Inicio de datos")
-            //Se mira si hay datos dentro del response
-            if(mealDetail.body() != null){
-                Log.i("dani",mealDetail.body().toString())
-                runOnUiThread{ dataReceived(mealDetail.body()!!)}
+        mealDataViewModel.getDetailsMeal(id)
+        runOnUiThread {
+            mealDataViewModel.detailsDataModel.observe(this@DetailMealActivity){detailsResponse ->
+                detailsResponse?.let { dataReceived(detailsResponse) }
             }
         }
     }
 
-    private fun dataReceived(meal: MealDetailResponse) {
-        val mealObj = meal.meals[0] //Tiene sólo un objeto el Array !!!!
-        val name = mealObj.name
-        binding.tvTitle.text = name
-        val imageUrl = mealObj.image
+    private fun dataReceived(meal: List<Meal>) {
+        //Tiene sólo un objeto el Array !!!!
+
+        binding.tvTitle.text = meal[0].name
+        val imageUrl = meal[0].image
         Picasso.get().load(imageUrl).into(binding.ivMealD)
-        val category = mealObj.category
+        val category = meal[0].category
         binding.tvSubtitleCategory.text = category
-        val area = mealObj.area
+        val area = meal[0].area
         binding.tvArea.text = area
-        val instructions = mealObj.instructions
+        val instructions = meal[0].instructions
         binding.tvInstructions.text = instructions
+
+
     }
 
     private fun getRetrofit(): Retrofit {

@@ -12,11 +12,11 @@ import retrofit2.http.Url
 
 interface ApiService {
 
-    @GET
-    suspend fun getMeals(@Url url:String): Response<MealDataResponse>
+    @GET("search.php")
+    suspend fun getMeals(@Query("s") mealName: String): Response<MealDataResponse>
 
-    @GET
-    suspend fun getDetailsMealId(@Url url:String): Response<MealDetailResponse>
+    @GET("lookup.php")
+    suspend fun getDetailsMealId(@Query("i") id: String): Response<MealDetailResponse>
 
     @GET("categories.php")
     suspend fun getCategories(): Response<CategoryResponse>
@@ -24,6 +24,6 @@ interface ApiService {
     @GET("filter.php")
     suspend fun getMealsByCategory(@Query("c") categoryName:String): Response<MealDataResponse>
 
-    @GET
-    suspend fun getRandomMeal(@Url url:String): Response<MealDetailResponse>
+    @GET("random.php")
+    suspend fun getRandomMeal(): Response<MealDetailResponse>
 }

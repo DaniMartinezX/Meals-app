@@ -1,41 +1,58 @@
 package com.hola.appcountries.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hola.appcountries.core.RetrofitHelper
 import com.hola.appcountries.data.model.CategoryItemResponse
+import com.hola.appcountries.data.model.Meal
 import com.hola.appcountries.data.model.MealItemResponse
-import com.hola.appcountries.data.network.ApiService
-import com.hola.appcountries.domain.GetCategoriesUseCase
+import com.hola.appcountries.domain.GetDetailsMealByIdUseCase
 import com.hola.appcountries.domain.GetMealsByCategory
-import dagger.hilt.android.AndroidEntryPoint
+import com.hola.appcountries.domain.GetMealsBySearchUseCase
+import com.hola.appcountries.domain.GetRandomMealUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-
-class MealDataViewModel(category:String): ViewModel() {
-
-    val categoryModel = MutableLiveData<List<CategoryItemResponse>>()
-    val mealDataModel = MutableLiveData<List<MealItemResponse>>()
-
-    private var getCategoriesUseCase = GetCategoriesUseCase()
-    private var getMealsByCategory = GetMealsByCategory(category)
+import javax.inject.Inject
 
 
-    fun onCreate(categoryName: String) {
+@HiltViewModel
+class MealDataViewModel @Inject constructor(
+    private val getMealsByCategory: GetMealsByCategory,
+    private val getMealsBySearchUseCase: GetMealsBySearchUseCase,
+    private val getDetailsMealByIdUseCase: GetDetailsMealByIdUseCase,
+    private val getRandomMealUseCase: GetRandomMealUseCase
+): ViewModel() {
+
+    var mealDataModel = MutableLiveData<List<MealItemResponse>>()
+    var detailsDataModel = MutableLiveData<List<Meal>>()
+
+    fun onCreate(category:String){
         viewModelScope.launch {
-            getCategories()
-            getMealsByCategories(categoryName)
+            val meals = getMealsByCategory.getMealsByCategory(category)
+            mealDataModel.value = meals
         }
     }
 
-    suspend fun getCategories(){
-        val categories = getCategoriesUseCase()
-        categoryModel.value = categories
+    fun searchByName(name:String){
+        viewModelScope.launch {
+            val meals = getMealsBySearchUseCase.getMealsBySearch(name)
+            mealDataModel.value = meals
+        }
     }
 
-    suspend fun getMealsByCategories(category: String){
-        getMealsByCategory.invoke(category)
+    fun getDetailsMeal(id:String){
+        viewModelScope.launch {
+            val details = getDetailsMealByIdUseCase.getDetailsMeal(id)
+            detailsDataModel.value = details
+        }
     }
-}
+
+    fun getRandomMeal(){
+        viewModelScope.launch {
+            val details = getRandomMealUseCase.getRandomMeal()
+            detailsDataModel.value = details
+        }
+    }
+
+    }

@@ -3,12 +3,17 @@ package com.hola.appcountries.ui.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.hola.appcountries.R
+import com.hola.appcountries.data.model.Meal
 import com.hola.appcountries.data.network.ApiService
 import com.hola.appcountries.data.model.MealDetailResponse
 import com.hola.appcountries.databinding.ActivityHomeBinding
+import com.hola.appcountries.ui.view.DetailMealActivity.Companion.EXTRA_ID
+import com.hola.appcountries.ui.viewmodel.MealDataViewModel
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,10 +21,12 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var retrofit: Retrofit
+    private val mealDataViewModel: MealDataViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,14 +63,10 @@ class HomeActivity : AppCompatActivity() {
 
         binding.btnImage.setOnClickListener {
             binding.flMeal.isVisible = true
-            CoroutineScope(Dispatchers.IO).launch {
-                val myResponse: Response<MealDetailResponse> =
-                retrofit.create(ApiService::class.java).getRandomMeal("random.php")
-                if(myResponse.isSuccessful){
-                    val response: MealDetailResponse? = myResponse.body()
-                    if (response != null){
-                        runOnUiThread{ dataReceived(response)}
-                    }
+            mealDataViewModel.getRandomMeal()
+            runOnUiThread {
+                mealDataViewModel.detailsDataModel.observe(this@HomeActivity){mealResponse ->
+                    mealResponse.let { dataReceived(it) }
                 }
             }
         }
@@ -74,12 +77,12 @@ class HomeActivity : AppCompatActivity() {
 
     private fun navigateToDetail(id: String) {
         val intent = Intent(this, DetailMealActivity::class.java)
-        intent.putExtra(DetailMealActivity.EXTRA_ID, id)
+        intent.putExtra(EXTRA_ID, id)
         startActivity(intent)
     }
 
-    private fun dataReceived(meal: MealDetailResponse) {
-        val mealObj = meal.meals[0] //Tiene sólo un objeto el Array !!!!
+    private fun dataReceived(meal: List<Meal>) {
+        val mealObj = meal[0] //Tiene sólo un objeto el Array !!!!
         val imageUrl = mealObj.image
         Picasso.get().load(imageUrl).into(binding.ivMeal)
         val nameMeal = mealObj.name
