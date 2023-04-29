@@ -2,20 +2,12 @@ package com.hola.appcountries.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
-import com.hola.appcountries.data.model.Meal
-import com.hola.appcountries.data.network.ApiService
-import com.hola.appcountries.data.model.MealDetailResponse
 import com.hola.appcountries.databinding.ActivityDetailMealBinding
-import com.hola.appcountries.domain.GetDetailsMealByIdUseCase
-import com.hola.appcountries.domain.GetMealsBySearchUseCase
+import com.hola.appcountries.domain.model.MealDetailItem
 import com.hola.appcountries.ui.viewmodel.MealDataViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -48,7 +40,7 @@ class DetailMealActivity : AppCompatActivity() {
         }
     }
 
-    private fun dataReceived(meal: List<Meal>) {
+    private fun dataReceived(meal: List<MealDetailItem>) {
         //Tiene sólo un objeto el Array !!!!
 
         binding.tvTitle.text = meal[0].name

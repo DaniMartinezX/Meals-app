@@ -7,16 +7,16 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.hola.appcountries.R
 import com.hola.appcountries.data.model.CategoryItemResponse
-import com.hola.appcountries.data.model.CategoryResponse
+import com.hola.appcountries.domain.model.CategoryItem
 
 interface OnItemClickListener{
     fun onItemClick(category: CategoryItemResponse)
 }
-class CategoryAdapter(var categoriesList: List<CategoryItemResponse> = emptyList()) :
+class CategoryAdapter(var categoriesList: List<CategoryItem> = emptyList()) :
     RecyclerView.Adapter<CategoryViewHolder>() {
 
     interface OnItemClickListener{
-        fun onItemClick(category: CategoryItemResponse)
+        fun onItemClick(category: CategoryItem)
     }
 
     private var selectedItemIndex = -1
@@ -26,7 +26,7 @@ class CategoryAdapter(var categoriesList: List<CategoryItemResponse> = emptyList
         this.listener = listener
     }
 
-    fun updateList(list: List<CategoryItemResponse>) {
+    fun updateList(list: List<CategoryItem>) {
         categoriesList = list
         notifyDataSetChanged()
     }

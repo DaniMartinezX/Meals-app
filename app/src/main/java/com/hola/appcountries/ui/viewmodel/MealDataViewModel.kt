@@ -11,6 +11,8 @@ import com.hola.appcountries.domain.GetDetailsMealByIdUseCase
 import com.hola.appcountries.domain.GetMealsByCategory
 import com.hola.appcountries.domain.GetMealsBySearchUseCase
 import com.hola.appcountries.domain.GetRandomMealUseCase
+import com.hola.appcountries.domain.model.MealDB
+import com.hola.appcountries.domain.model.MealDetailItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,13 +26,13 @@ class MealDataViewModel @Inject constructor(
     private val getRandomMealUseCase: GetRandomMealUseCase
 ): ViewModel() {
 
-    var mealDataModel = MutableLiveData<List<MealItemResponse>>()
-    var detailsDataModel = MutableLiveData<List<Meal>>()
+    var mealDataModel = MutableLiveData<List<MealDB>>()
+    var detailsDataModel = MutableLiveData<List<MealDetailItem>>()
 
     fun onCreate(category:String){
         viewModelScope.launch {
             val meals = getMealsByCategory.getMealsByCategory(category)
-            mealDataModel.value = meals
+            detailsDataModel.value = meals
         }
     }
 

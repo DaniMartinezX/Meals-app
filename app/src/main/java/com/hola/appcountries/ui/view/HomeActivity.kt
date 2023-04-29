@@ -6,18 +6,12 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.hola.appcountries.R
-import com.hola.appcountries.data.model.Meal
-import com.hola.appcountries.data.network.ApiService
-import com.hola.appcountries.data.model.MealDetailResponse
 import com.hola.appcountries.databinding.ActivityHomeBinding
+import com.hola.appcountries.domain.model.MealDetailItem
 import com.hola.appcountries.ui.view.DetailMealActivity.Companion.EXTRA_ID
 import com.hola.appcountries.ui.viewmodel.MealDataViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -81,7 +75,7 @@ class HomeActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun dataReceived(meal: List<Meal>) {
+    private fun dataReceived(meal: List<MealDetailItem>) {
         val mealObj = meal[0] //Tiene sólo un objeto el Array !!!!
         val imageUrl = mealObj.image
         Picasso.get().load(imageUrl).into(binding.ivMeal)

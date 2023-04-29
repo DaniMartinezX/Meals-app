@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hola.appcountries.R
-import com.hola.appcountries.data.model.MealItemResponse
+import com.hola.appcountries.domain.model.MealDB
 
 //Función landa para que navegue a los detalles al pulsar en el cardView
 class MealAdapter(
-    var mealList: List<MealItemResponse> = emptyList(),
+    var mealList: List<MealDB> = emptyList(),
     private val onItemSelected: (String) -> Unit
 ) :
     RecyclerView.Adapter<MealViewHolder>() {
 
-    fun updateList(list: List<MealItemResponse>) {
+    fun updateList(list: List<MealDB>) {
         mealList = list
         notifyDataSetChanged()
     }

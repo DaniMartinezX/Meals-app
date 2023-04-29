@@ -9,8 +9,9 @@ import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.hola.appcountries.data.model.CategoryItemResponse
 import com.hola.appcountries.databinding.ActivityMealsListBinding
+import com.hola.appcountries.domain.model.CategoryItem
+import com.hola.appcountries.domain.model.toDomain
 import com.hola.appcountries.ui.view.DetailMealActivity.Companion.EXTRA_ID
 import com.hola.appcountries.ui.viewmodel.CategoryViewModel
 import com.hola.appcountries.ui.viewmodel.MealDataViewModel
@@ -66,12 +67,13 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
 
         //Filtrado por categorías al seleccionar una
         adapterCategory.setOnItemClickListener(object : CategoryAdapter.OnItemClickListener {
-            override fun onItemClick(category: CategoryItemResponse) {
+            override fun onItemClick(category: CategoryItem) {
                 val categoryName = category.name    //Da el nombre
                 mealDataViewModel.onCreate(categoryName)
                 runOnUiThread {
-                    mealDataViewModel.mealDataModel.observe(this@MealsListActivity) { mealsResponse ->
-                        mealsResponse?.let { adapter.updateList(it) }
+                    mealDataViewModel.detailsDataModel.observe(this@MealsListActivity) { mealsResponse ->
+                        val meals = mealsResponse.map { it.toDomain() }
+                        mealsResponse?.let { adapter.updateList(meals)}
                     }
                 }
             }
