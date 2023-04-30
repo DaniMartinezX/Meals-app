@@ -10,10 +10,11 @@ data class MealDetailItem(
     val image: String,
     val category: String,
     val area: String,
-    val instructions: String
+    val instructions: String,
+    var favorite: Boolean
 )
 
 //Mappers
-fun MealDetailEntity.toDomain() = MealDetailItem(id,name,image,category,area,instructions)
-fun MealItemResponse.toDomainCat() = MealDetailItem(id = mealId, name = name, image = image, area = "", category = "", instructions = "")
-fun Meal.toDomain() = MealDetailItem(id,name,image,category,area,instructions)
+fun MealDetailEntity.toDomain() = MealDetailItem(id,name,image,category,area,instructions, favorite = false)
+fun MealItemResponse.toDomainCat() = MealDetailItem(id = mealId, name = name, image = image, area = "", category = "", instructions = "", favorite = false)
+fun Meal.toDomain() = MealDetailItem(id,name,image,category,area,instructions, favorite = false)

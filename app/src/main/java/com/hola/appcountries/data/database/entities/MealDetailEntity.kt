@@ -13,7 +13,8 @@ data class MealDetailEntity(
     @ColumnInfo(name = "image") val image: String,
     @ColumnInfo(name = "category") val category: String,
     @ColumnInfo(name = "area") val area: String,
-    @ColumnInfo(name = "instructions") val instructions: String
+    @ColumnInfo(name = "instructions") val instructions: String,
+    @ColumnInfo(name = "favorite") val favorite: Boolean
 )
 
-fun MealDetailItem.toDatabase() = MealDetailEntity(id = id, name = name, image = image, category = category, area = area, instructions = instructions)
+fun MealDetailItem.toDatabase() = MealDetailEntity(id = id, name = name, image = image, category = category, area = area, instructions = instructions, favorite = false)

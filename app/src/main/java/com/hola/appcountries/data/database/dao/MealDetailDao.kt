@@ -18,6 +18,15 @@ interface MealDetailDao {
     @Query("SELECT * FROM mealDetail_table ORDER BY RANDOM() LIMIT 1")
     suspend fun getRandomMeal():List<MealDetailEntity>
 
+    @Query("SELECT * FROM mealDetail_table WHERE favorite = 1")
+    suspend fun getFavoriteMeals():List<MealDetailEntity>
+
+    @Query("UPDATE mealDetail_table SET favorite=1 WHERE id=:id")
+    suspend fun insertInFavorites(id:String): Int
+
+    @Query("UPDATE mealDetail_table SET favorite=1 WHERE id=:id")
+    suspend fun discardFromFavorites(id:String): Int
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllDetails(meals:List<MealDetailEntity>)
 

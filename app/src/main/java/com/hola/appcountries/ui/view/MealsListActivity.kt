@@ -87,6 +87,7 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
         binding.rvMeals.adapter = adapter
 
 
+
     }
 
 

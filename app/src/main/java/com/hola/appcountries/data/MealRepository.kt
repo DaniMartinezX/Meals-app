@@ -29,6 +29,11 @@ class MealRepository @Inject constructor(
     private val mealDao: MealDao
 ) {
 
+    suspend fun getFavoriteMealsFromDatabase(): List<MealDetailItem>{
+        val response = mealDetailDao.getFavoriteMeals()
+        return response.map { it.toDomain() }
+    }
+
     suspend fun getRandomMealFromApi(): List<MealDetailItem>{
         val response = api.getRandomMeal()
         return response.map { it.toDomain() }
@@ -47,6 +52,11 @@ class MealRepository @Inject constructor(
     suspend fun getDetailsMealFromDatabase(id: String): List<MealDetailItem> {
         val response = mealDetailDao.getMealDetailsById(id)
         return response.map { it.toDomain() }
+    }
+
+    suspend fun insertIntoFavoritesFromDatabase(id:String){
+        mealDetailDao.insertInFavorites(id)
+
     }
 
     suspend fun getAllCategoriesFromApi(): List<CategoryItem> {
