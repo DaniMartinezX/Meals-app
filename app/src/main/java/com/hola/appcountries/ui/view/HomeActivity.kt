@@ -52,6 +52,7 @@ class HomeActivity : AppCompatActivity() {
                 else -> false
             }
         }
+        binding.bottomNavigationView.selectedItemId = R.id.placeholder
 
 
 

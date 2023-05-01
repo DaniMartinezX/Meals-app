@@ -26,6 +26,8 @@ class ProfileActivity : AppCompatActivity() {
         val provider = bundle?.getString("provider")
         setup(email ?: "", provider ?: "")
 
+        binding.bottomNavigationView.selectedItemId = R.id.placeholder
+
         initUI()
     }
 
@@ -61,6 +63,7 @@ class ProfileActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
     }
 
     private fun navigateToHome() {

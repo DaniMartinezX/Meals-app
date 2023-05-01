@@ -3,6 +3,7 @@ package com.hola.appcountries.ui.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.hola.appcountries.R
@@ -33,6 +34,8 @@ class AuthActivity : AppCompatActivity() {
                         showAlert()
                     }
                 }
+            } else {
+                Toast.makeText(this, "An error has occurred, you must fill in both fields", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -48,6 +51,8 @@ class AuthActivity : AppCompatActivity() {
                         showAlert()
                     }
                 }
+            } else {
+                Toast.makeText(this, "An error has occurred, you must fill in both fields", Toast.LENGTH_SHORT).show()
             }
         }
     }

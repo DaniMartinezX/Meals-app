@@ -61,6 +61,7 @@ class FavoritesActivity : AppCompatActivity() {
                 else -> false
             }
         }
+        binding.bottomNavigationView.selectedItemId = R.id.favorites
 
 
     }
