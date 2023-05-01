@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.FavoritesActivity">
+    tools:context=".ui.view.FavoritesActivity"
+    android:background="@drawable/s2">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -16,17 +17,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:src="@drawable/ic_empty_star"
+            android:src="@drawable/ic_full_star"
             android:textAllCaps="true"
             android:textSize="60sp"
             android:textStyle="bold"
-            app:tint="@color/black" />
+            android:layout_marginTop="12dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="24sp"
             android:text="@string/favorites"
+            android:background="@color/off_white"
+            android:textColor="@color/black"
             android:gravity="center"/>
 
         <com.google.android.material.divider.MaterialDivider

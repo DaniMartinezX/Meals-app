@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.HomeActivity">
+    tools:context=".ui.view.HomeActivity"
+    android:background="@drawable/s2">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -21,6 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="What are we eating today?"
+            android:textColor="@color/white"
+            android:background="@color/black"
             android:gravity="center"
             android:textSize="32sp"
             android:textStyle="italic|bold"/>
@@ -39,11 +42,11 @@
 
                 <ImageView
                     android:id="@+id/ivMeal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_random_white"
+                    android:src="@drawable/ic_app_day"
                     android:background="@color/black"/>
 
                 <FrameLayout
@@ -83,9 +86,11 @@
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btnImage"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="120dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_random"
+            android:background="@drawable/transparent_background"
+            android:src="@drawable/ic_random_white_big"
+            android:tint="@color/white"
             android:layout_marginHorizontal="32dp"/>
 
 

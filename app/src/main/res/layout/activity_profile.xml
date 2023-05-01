@@ -4,20 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.ProfileActivity">
+    tools:context=".ui.view.ProfileActivity"
+    android:background="@drawable/s2">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#33959595">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_big_person" />
+            android:src="@drawable/ic_big_person"
+            app:tint="@color/green" />
 
         <TextView
             android:layout_width="match_parent"
@@ -26,7 +29,8 @@
             android:text="@string/email"
             android:textAllCaps="true"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/tvEmail"
@@ -36,7 +40,8 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            tools:text="Texto de prueba" />
+            tools:text="Texto de prueba"
+            android:background="@color/off_white"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -45,7 +50,8 @@
             android:text="@string/provider"
             android:textAllCaps="true"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/tvProvider"
@@ -55,7 +61,8 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            tools:text="Texto de prueba" />
+            tools:text="Texto de prueba"
+            android:background="@color/off_white"/>
 
         <Button
             android:id="@+id/btnLogOut"
