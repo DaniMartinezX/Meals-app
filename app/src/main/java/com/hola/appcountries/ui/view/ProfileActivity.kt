@@ -64,6 +64,8 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
 
+        binding.bottomNavigationView.selectedItemId = R.id.profile
+
     }
 
     private fun navigateToHome() {
