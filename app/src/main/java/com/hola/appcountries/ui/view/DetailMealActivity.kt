@@ -8,8 +8,6 @@ import com.hola.appcountries.domain.model.MealDetailItem
 import com.hola.appcountries.ui.viewmodel.MealDataViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 @AndroidEntryPoint
 class DetailMealActivity : AppCompatActivity() {
@@ -56,11 +54,4 @@ class DetailMealActivity : AppCompatActivity() {
 
     }
 
-    private fun getRetrofit(): Retrofit {
-        return Retrofit
-            .Builder()
-            .baseUrl("https://www.themealdb.com/api/json/v1/1/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
 }

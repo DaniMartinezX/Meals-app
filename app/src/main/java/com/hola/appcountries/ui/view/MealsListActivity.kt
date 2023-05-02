@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,7 +26,6 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
     private lateinit var adapter: MealAdapter
     private lateinit var adapterCategory: CategoryAdapter
     private lateinit var rvCategories: RecyclerView
-    private lateinit var rvMeals: RecyclerView
     private val categoryViewModel: CategoryViewModel by viewModels()
     private val mealDataViewModel: MealDataViewModel by viewModels()
 
@@ -55,7 +53,7 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
 
 
     private fun initUI() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchByName(query.orEmpty())
                 return false
@@ -93,6 +91,7 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
 
     private fun searchByName(query: String) {
         binding.progressBar.isVisible = true
+
         mealDataViewModel.searchByName(query)
         runOnUiThread {
             mealDataViewModel.mealDataModel.observe(this@MealsListActivity){ mealsResponse ->

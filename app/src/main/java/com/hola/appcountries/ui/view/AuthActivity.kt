@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
-import com.hola.appcountries.R
 import com.hola.appcountries.databinding.ActivityAuthBinding
 
 

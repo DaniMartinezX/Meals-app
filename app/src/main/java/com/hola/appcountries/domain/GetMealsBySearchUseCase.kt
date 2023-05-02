@@ -2,7 +2,6 @@ package com.hola.appcountries.domain
 
 import com.hola.appcountries.data.MealRepository
 import com.hola.appcountries.data.database.entities.toDatabase
-import com.hola.appcountries.data.model.MealItemResponse
 import com.hola.appcountries.domain.model.MealDB
 import javax.inject.Inject
 

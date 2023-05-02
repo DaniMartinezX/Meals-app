@@ -12,21 +12,17 @@ import com.hola.appcountries.ui.view.DetailMealActivity.Companion.EXTRA_ID
 import com.hola.appcountries.ui.viewmodel.MealDataViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
-    private lateinit var retrofit: Retrofit
     private val mealDataViewModel: MealDataViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        retrofit = getRetrofit()
         initUI()
     }
 
@@ -61,7 +57,7 @@ class HomeActivity : AppCompatActivity() {
             mealDataViewModel.getRandomMeal()
             runOnUiThread {
                 mealDataViewModel.detailsDataModel.observe(this@HomeActivity){mealResponse ->
-                    mealResponse.let { dataReceived(it) }
+                    dataReceived(mealResponse)
                 }
             }
         }
@@ -104,11 +100,4 @@ class HomeActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun getRetrofit(): Retrofit {
-        return Retrofit
-            .Builder()
-            .baseUrl("https://www.themealdb.com/api/json/v1/1/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
 }

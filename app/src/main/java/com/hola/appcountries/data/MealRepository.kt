@@ -1,18 +1,11 @@
 package com.hola.appcountries.data
 
-import android.util.Log
 import com.hola.appcountries.data.database.dao.CategoryDao
 import com.hola.appcountries.data.database.dao.MealDao
 import com.hola.appcountries.data.database.dao.MealDetailDao
 import com.hola.appcountries.data.database.entities.CategoryEntity
 import com.hola.appcountries.data.database.entities.MealDataEntity
 import com.hola.appcountries.data.database.entities.MealDetailEntity
-import com.hola.appcountries.data.model.CategoryItemResponse
-import com.hola.appcountries.data.model.CategoryProvider
-import com.hola.appcountries.data.model.CategoryResponse
-import com.hola.appcountries.data.model.DetailsProvider
-import com.hola.appcountries.data.model.Meal
-import com.hola.appcountries.data.model.MealDataProvider
 import com.hola.appcountries.data.model.MealItemResponse
 import com.hola.appcountries.data.network.MealService
 import com.hola.appcountries.domain.model.CategoryItem

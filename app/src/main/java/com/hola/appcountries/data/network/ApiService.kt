@@ -1,14 +1,11 @@
 package com.hola.appcountries.data.network
 
-import com.hola.appcountries.data.model.CategoryItemResponse
-import com.hola.appcountries.data.model.CategoryProvider
 import com.hola.appcountries.data.model.CategoryResponse
 import com.hola.appcountries.data.model.MealDataResponse
 import com.hola.appcountries.data.model.MealDetailResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
-import retrofit2.http.Url
 
 interface ApiService {
 

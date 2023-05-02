@@ -6,13 +6,9 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.hola.appcountries.R
-import com.hola.appcountries.data.model.CategoryItemResponse
 import com.hola.appcountries.domain.model.CategoryItem
 
-interface OnItemClickListener{
-    fun onItemClick(category: CategoryItemResponse)
-}
-class CategoryAdapter(var categoriesList: List<CategoryItem> = emptyList()) :
+class CategoryAdapter(private var categoriesList: List<CategoryItem> = emptyList()) :
     RecyclerView.Adapter<CategoryViewHolder>() {
 
     interface OnItemClickListener{
@@ -26,6 +22,7 @@ class CategoryAdapter(var categoriesList: List<CategoryItem> = emptyList()) :
         this.listener = listener
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateList(list: List<CategoryItem>) {
         categoriesList = list
         notifyDataSetChanged()

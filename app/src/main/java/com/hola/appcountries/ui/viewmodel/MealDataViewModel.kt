@@ -1,14 +1,9 @@
 package com.hola.appcountries.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hola.appcountries.data.model.CategoryItemResponse
-import com.hola.appcountries.data.model.Meal
-import com.hola.appcountries.data.model.MealItemResponse
 import com.hola.appcountries.domain.GetDetailsMealByIdUseCase
-import com.hola.appcountries.domain.GetFavoriteMeals
 import com.hola.appcountries.domain.GetMealsByCategory
 import com.hola.appcountries.domain.GetMealsBySearchUseCase
 import com.hola.appcountries.domain.GetRandomMealUseCase

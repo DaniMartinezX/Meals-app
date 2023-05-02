@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hola.appcountries.data.model.CategoryItemResponse
 import com.hola.appcountries.domain.GetCategoriesUseCase
 import com.hola.appcountries.domain.model.CategoryItem
 import dagger.hilt.android.lifecycle.HiltViewModel
