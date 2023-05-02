@@ -12,4 +12,6 @@
     <string name="log_out">Log out</string>
     <string name="provider">Provider</string>
     <string name="favorites">Favorites</string>
+    <string name="empty_favorites">There is no food in favorites yet</string>
+    <string name="subtitle_random">Click on the dice</string>
 </resources>

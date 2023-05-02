@@ -15,14 +15,11 @@ import com.hola.appcountries.ui.view.DetailMealActivity.Companion.EXTRA_ID
 import com.hola.appcountries.ui.viewmodel.CategoryViewModel
 import com.hola.appcountries.ui.viewmodel.MealDataViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 @AndroidEntryPoint
 class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
 
     private lateinit var binding: ActivityMealsListBinding
-    private lateinit var retrofit: Retrofit
     private lateinit var adapter: MealAdapter
     private lateinit var adapterCategory: CategoryAdapter
     private lateinit var rvCategories: RecyclerView
@@ -33,7 +30,6 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
         super.onCreate(savedInstanceState)
         binding = ActivityMealsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        retrofit = getRetrofit()
 
         //Cargando categorías
         rvCategories = binding.rvCategories
@@ -107,13 +103,7 @@ class MealsListActivity : AppCompatActivity(), OnQueryTextListener {
         startActivity(intent)
     }
 
-    private fun getRetrofit(): Retrofit {
-        return Retrofit
-            .Builder()
-            .baseUrl("https://www.themealdb.com/api/json/v1/1/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
+
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (!query.isNullOrEmpty()) {
